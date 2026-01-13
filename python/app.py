@@ -72,6 +72,9 @@ def echo_user_input(user_input):
     message = f"You said: {user_input}"
     return message
 
+def remove_vowels(s: str) -> str:
+    return s.translate(str.maketrans("", "", "aeiouAEIOU"))
+
 # ==================== Route Handlers ====================
 
 async def status_handler(request):
@@ -107,11 +110,14 @@ async def input_handler(request):
     
     user_input = data['input']
     count = state.increment_counter()
+
+    processed_input = remove_vowels(user_input)
     
     return JSONResponse({
         "type": "user_input",
-        "message": echo_user_input(user_input),
         "input": user_input,
+        "message": echo_user_input(user_input),
+        "output": processed_input,
         "count": count,
         "timestamp": time.time()
     })
