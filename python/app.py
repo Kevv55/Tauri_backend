@@ -72,8 +72,8 @@ def echo_user_input(user_input):
     message = f"You said: {user_input}"
     return message
 
-def remove_vowels(s: str) -> str:
-    return s.translate(str.maketrans("", "", "aeiouAEIOU"))
+def remove_vowels(s):
+    return s.translate(s.maketrans("", "", "aeiouAEIOU"))
 
 # ==================== Route Handlers ====================
 

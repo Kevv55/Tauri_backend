@@ -7,6 +7,7 @@ interface PythonOutput {
   type?: string;
   message?: string;
   input?: string;
+  output?: string;
   count?: number;
   timestamp?: number;
 }
@@ -48,6 +49,10 @@ function InputCard({ data }: { data: PythonOutput }) {
       <div className="card-row">
         <span className="label">Echo:</span>
         <span className="value">{data.message || "-"}</span>
+      </div>
+      <div className="card-row">
+        <span className="label">Processed:</span>
+        <span className="value">{data.output || "-"}</span>
       </div>
       <div className="card-row">
         <span className="label">Time:</span>
