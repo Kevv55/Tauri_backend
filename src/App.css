@@ -104,7 +104,7 @@ button {
 }
 
 .output-card {
-  background-color: #ffffff;
+  background-color: #404040;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -181,20 +181,20 @@ button {
 
 @media (prefers-color-scheme: dark) {
   .output-card {
-    background-color: #1e1e1e;
+    background-color: #404040;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   }
 
   .card-row {
-    border-bottom-color: #404040;
+    border-bottom-color: #505050;
   }
 
   .label {
-    color: #a0a0a0;
+    color: #b0b0b0;
   }
 
   .value {
-    color: #f6f6f6;
+    color: #ffffff;
   }
 }
 

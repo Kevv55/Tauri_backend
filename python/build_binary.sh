@@ -23,16 +23,23 @@ pyinstaller pyinstaller.spec
 
 # Move to binaries directory
 mkdir -p ../src-tauri/binaries
+
+# Get architecture and normalize to Rust convention
+# uname -m returns: arm64 (Apple Silicon), x86_64 (Intel), etc.
+# Rust uses: aarch64 (ARM 64-bit), x86_64, etc.
+ARCH=$(uname -m)
+if [ "$ARCH" == "arm64" ]; then
+    ARCH="aarch64"  # Normalize Apple Silicon to Rust convention
+fi
+
 if [ "$(uname)" == "Darwin" ]; then
-    # macOS: Get architecture
-    ARCH=$(uname -m)
+    # macOS
     TARGET_NAME="ai-engine-${ARCH}-apple-darwin"
     cp dist/ai-engine "../src-tauri/binaries/${TARGET_NAME}"
     chmod +x "../src-tauri/binaries/${TARGET_NAME}"
     echo "Binary created: binaries/${TARGET_NAME}"
 elif [ "$(uname)" == "Linux" ]; then
     # Linux
-    ARCH=$(uname -m)
     TARGET_NAME="ai-engine-${ARCH}-unknown-linux-gnu"
     cp dist/ai-engine "../src-tauri/binaries/${TARGET_NAME}"
     chmod +x "../src-tauri/binaries/${TARGET_NAME}"

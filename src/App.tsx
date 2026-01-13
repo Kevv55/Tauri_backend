@@ -174,7 +174,7 @@ function App() {
           <StatusCard data={statusOutput} />
         ) : (
           <div className="output-card">
-            <p>Waiting for status updates...</p>
+            <p style={{ color: "white" }}>Waiting for status updates...</p>
           </div>
         )}
       </div>

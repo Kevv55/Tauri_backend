@@ -217,6 +217,8 @@ checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 name = "backend-trial"
 version = "0.1.0"
 dependencies = [
+ "http 0.2.12",
+ "hyper 0.14.32",
  "reqwest 0.11.27",
  "serde",
  "serde_json",
