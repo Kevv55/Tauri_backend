@@ -28,11 +28,25 @@ build/
 target/
 dist/
 
-# Python build artifacts
+# Python build artifacts - PyInstaller cache/output
 python/build/
+python/dist/
 *.pyc
+*.pyo
 __pycache__/
+*.spec.bak
 
-# Tauri binaries (compiled, not source)
-src-tauri/binaries/
+# PyInstaller artifacts (these cause rebuild issues if tracked)
+*.pyz
+*.pkg
+*.toc
+*.zip
+localpycs/
+warn-*.txt
+xref-*.html
+
+# Tauri target directory
 src-tauri/target/
+
+# Uncomment the next line if you DON'T want to commit compiled binaries
+# src-tauri/binaries/

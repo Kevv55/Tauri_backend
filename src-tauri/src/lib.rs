@@ -194,13 +194,17 @@ async fn socket_http_get(socket_path: &str, endpoint: &str) -> Result<serde_json
         .map_err(|e| format!("Failed to read from socket: {}", e))?;
     
     // Parse HTTP response body (skip headers)
-    let parts: Vec<&str> = response.splitn(2, "\r\n\r\n").collect();
-    if parts.len() < 2 {
-        return Err("Invalid HTTP response format".to_string());
-    }
+    // Try Windows line endings first (\r\n\r\n), then Unix line endings (\n\n)
+    let body = if let Some(pos) = response.find("\r\n\r\n") {
+        &response[pos + 4..]
+    } else if let Some(pos) = response.find("\n\n") {
+        &response[pos + 2..]
+    } else {
+        return Err("Invalid HTTP response format - no body separator found".to_string());
+    };
     
     // Parse JSON from body
-    serde_json::from_str(parts[1])
+    serde_json::from_str(body.trim())
         .map_err(|e| format!("Failed to parse response JSON: {}", e))
 }
 
@@ -237,18 +241,22 @@ async fn socket_http_post(socket_path: &str, endpoint: &str, body: &serde_json::
         .await
         .map_err(|e| format!("Failed to read from socket: {}", e))?;
     
-    // Parse HTTP response body
-    let parts: Vec<&str> = response.splitn(2, "\r\n\r\n").collect();
-    if parts.len() < 2 {
-        return Err("Invalid HTTP response format".to_string());
-    }
+    // Parse HTTP response body (skip headers)
+    // Try Windows line endings first (\r\n\r\n), then Unix line endings (\n\n)
+    let body = if let Some(pos) = response.find("\r\n\r\n") {
+        &response[pos + 4..]
+    } else if let Some(pos) = response.find("\n\n") {
+        &response[pos + 2..]
+    } else {
+        return Err("Invalid HTTP response format - no body separator found".to_string());
+    };
     
     // Parse JSON from body (skip empty bodies)
-    if parts[1].is_empty() {
+    if body.is_empty() {
         return Ok(serde_json::json!({}));
     }
     
-    serde_json::from_str(parts[1])
+    serde_json::from_str(body.trim())
         .map_err(|e| format!("Failed to parse response JSON: {}", e))
 }
 

@@ -11,6 +11,9 @@ This template should help get you started developing with Tauri, React and Types
 - (first time) Install modules on virtual env
 ```pip install -r python/requirements.txt```
 
+- Activate your virtual env
+```source venv/bin/activate```
+
 - After making changes to the python application, recompile binary
 ```bash python/build_binary.sh```
 

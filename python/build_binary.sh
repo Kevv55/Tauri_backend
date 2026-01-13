@@ -1,15 +1,19 @@
 #!/bin/bash
 # python/build_binary.sh
-# Script to build Python Flask app as standalone executable
+# Script to build Python Starlette/Hypercorn app as standalone executable
 
 set -e
 
-echo "Building Python Flask server as standalone binary..."
+echo "Building Python AI Engine as standalone binary..."
 
 # Activate venv if it exists
 if [ -d ".venv" ]; then
     source .venv/bin/activate
 fi
+
+# Clean PyInstaller cache to ensure fresh rebuild
+echo "Cleaning PyInstaller cache..."
+rm -rf python/build python/dist build/ai-engine
 
 # Install PyInstaller if not already installed
 pip install pyinstaller

@@ -1,13 +1,24 @@
 # python/pyinstaller.spec
 # -*- mode: python ; coding: utf-8 -*-
-# PyInstaller spec file for building Flask app as standalone executable
+# PyInstaller spec file for building Starlette/Hypercorn app as standalone executable
 
 a = Analysis(
     ['app.py'],
     pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=['flask', 'werkzeug'],
+    hiddenimports=[
+        'starlette',
+        'starlette.applications',
+        'starlette.responses',
+        'starlette.routing',
+        'hypercorn',
+        'hypercorn.asyncio',
+        'hypercorn.config',
+        'anyio',
+        'anyio._backends',
+        'anyio._backends._asyncio',
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
