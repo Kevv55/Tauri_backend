@@ -1,0 +1,18 @@
+{
+  "identifier": "sidecar-capability",
+  "description": "Allow running the python sidecar",
+  "local": true,
+  "windows": ["main"],
+  "permissions": [
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "binaries/ai-engine",
+          "cmd": "",
+          "sidecar": true
+        }
+      ]
+    }
+  ]
+}
